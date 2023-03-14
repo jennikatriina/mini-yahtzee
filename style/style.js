@@ -104,7 +104,7 @@ export default StyleSheet.create({
     paddingBottom: 20
   },
   total: {
-    fontSize: 25,
+    fontSize: 22,
     paddingTop: 25
   }
 });

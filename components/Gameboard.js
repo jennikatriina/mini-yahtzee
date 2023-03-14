@@ -237,7 +237,7 @@ export default Gameboard = ({ route }) => {
           <View style={styles.flex}>
             <MaterialCommunityIcons
               name={'dice-multiple'}
-              size={50}
+              size={60}
               color='#ffffff'
               style={styles.icon}
             />
