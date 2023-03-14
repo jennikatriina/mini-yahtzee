@@ -24,7 +24,7 @@ return (
             tabBarIcon: () => (
               <MaterialCommunityIcons name="home-account" 
               size={30}/> ),
-            tabBarActiveTintColor: '#C16F95',
+            tabBarActiveTintColor: '#b66088',
             tabBarInactiveTintColor: 'gray'        
           }} 
         />
@@ -33,9 +33,9 @@ return (
           component={Gameboard} 
           options={{
             tabBarIcon: () => (
-              <MaterialCommunityIcons name="home-account" 
+              <MaterialCommunityIcons name="dice-multiple" 
               size={30}/> ),
-            tabBarActiveTintColor: '#C16F95',
+            tabBarActiveTintColor: '#b66088',
             tabBarInactiveTintColor: 'gray'        
           }} 
         />
@@ -44,9 +44,9 @@ return (
           component={Scoreboard} 
           options={{
             tabBarIcon: () => (
-              <MaterialCommunityIcons name="home-account" 
+              <Entypo name="trophy" 
               size={30}/> ),
-            tabBarActiveTintColor: '#C16F95',
+            tabBarActiveTintColor: '#b66088',
             tabBarInactiveTintColor: 'gray'        
           }} 
         />

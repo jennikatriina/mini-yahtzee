@@ -26,9 +26,7 @@ export default Scoreboard = ( {navigation} ) => {
       const jsonValue = await AsyncStorage.getItem(SCOREBOARD_KEY);
       if (jsonValue !== null) {
         let tmpScores = JSON.parse(jsonValue);
-        setScores(tmpScores.sort((b, a) => parseFloat(a.points) - parseFloat(b.points)));
-        // Sort results here for the rendering sort() function
-        
+        setScores(tmpScores.sort((b, a) => parseFloat(a.points) - parseFloat(b.points)))
       }
     } catch (error) {
       console.log('Read error: ' + error.message)
@@ -44,6 +42,9 @@ export default Scoreboard = ( {navigation} ) => {
           color='#ffffff'
           style={styles.icon}
       />
+      <Text style={styles.topSeven}>
+        Top 7
+      </Text>
       <View >
         {scores.slice(0,7).map((player, i) => (
           <Text key={i}>{i + 1}. {player.name} {player.date} {player.time} {player.points} </Text>

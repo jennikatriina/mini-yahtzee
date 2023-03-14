@@ -18,10 +18,10 @@ export default Gameboard = ({ route }) => {
   // *** FOR DICE ROW IN THE TOP 
   // THis array has the information whether dice is selected or not
   const [selectedDices, setSelectedDices] = useState(new Array(NBR_OF_DICES).fill(false));
+
   // This array has dice spots throw 
   const [diceSpots, setDiceSpots] = useState(new Array(NBR_OF_DICES).fill(0));
 
-  // *** FOR POINTS ROW IN THE BOTTOM
   //This array has total points
   const [dicePointsTotal, setDicePointsTotal] = useState(new Array(MAX_SPOT).fill(0));
 
@@ -30,7 +30,6 @@ export default Gameboard = ({ route }) => {
   const [selectedDicePoints, setSelectedDicePoints] = useState(new Array(MAX_SPOT).fill(false));
 
   const [scores, setScores] = useState([]);
-
   const [totalPoints, setTotalPoints] = useState(0);
 
 
@@ -52,6 +51,7 @@ export default Gameboard = ({ route }) => {
   }
 
   const pointsRow = [];
+
   for (let spot = 0; spot < MAX_SPOT; spot++) {
     pointsRow.push(
       <Col key={"points" + spot}>
@@ -98,6 +98,7 @@ export default Gameboard = ({ route }) => {
     // points will be saved when all points from bottom row have been selected
     else if (selectedDicePoints.every(x => x)) {
       savePlayerpoints();
+      setStatus('Game over.');
     } else {
       let sum = 0;
 
@@ -106,7 +107,7 @@ export default Gameboard = ({ route }) => {
       }
       setTotalPoints(sum);
     }
-  }, [nbrOfThrowsLeft]); // if this isnt used, it will be one step behind / one press too late
+  }, [nbrOfThrowsLeft]); 
 
   function getDiceColor(i) {
     if (board.every((val, i, arr) => val === arr[0])) {
@@ -136,12 +137,10 @@ export default Gameboard = ({ route }) => {
   }
 
 
-  // aina ku painaa / aina ku heittojen määrä vaihtuu nii tulee iffillä status
   function selectDicePoints(i) {
     if (nbrOfThrowsLeft > 0) {
       setStatus('Throw 3 times before setting points');
     } else {
-
       let selected = [...selectedDices];
       let selectedPoints = [...selectedDicePoints];
       let points = [...dicePointsTotal];
@@ -159,9 +158,8 @@ export default Gameboard = ({ route }) => {
       if (selectedDicePoints[i]) {
         setStatus("You already selected points for" + [i + 1])
       }
-      return points[i];
-      
 
+      return points[i];
     }
 
   }
@@ -177,8 +175,6 @@ export default Gameboard = ({ route }) => {
       setDicePointsTotal(new Array(MAX_SPOT).fill(0));
       setTotalPoints(0);
       setStatus("Throw dices");
-      // setButtonText("Throw dices");
-      
     } else {
       let spots = [...diceSpots]
 
@@ -195,7 +191,6 @@ export default Gameboard = ({ route }) => {
       setStatus('Select and throw dices again');
     }
 
-    
   }
 
   const getScoreboardData = async () => {
@@ -204,7 +199,6 @@ export default Gameboard = ({ route }) => {
       if (jsonValue !== null) {
         let tmpScores = JSON.parse(jsonValue);
         setScores(tmpScores);
-
       }
     } catch (error) {
       console.log('Read error: ' + error.message)
@@ -220,9 +214,9 @@ export default Gameboard = ({ route }) => {
   const savePlayerpoints = async () => {
     const playerPoints = {
       name: playerName,
-      date: date + '.' + month + '.' + year,   // replace this by real date
-      time: hours + '.' + mins,      // replace this by real time
-      points: totalPoints,         // replace this by real points
+      date: date + '.' + month + '.' + year,   
+      time: hours + '.' + mins,     
+      points: totalPoints      
     }
     try {
       const newScore = [...scores, playerPoints];
@@ -240,16 +234,17 @@ export default Gameboard = ({ route }) => {
   return (
     <View style={styles.container}>
         {nbrOfThrowsLeft == 3 ? 
-        <View style={styles.flex}>
-          <MaterialCommunityIcons
-            name={'dice-multiple'}
-            size={50}
-            color='#ffffff'
-            style={styles.icon}
-          />
-        </View> 
-        : 
-        <View style={styles.flex}>{row}</View>}
+          <View style={styles.flex}>
+            <MaterialCommunityIcons
+              name={'dice-multiple'}
+              size={50}
+              color='#ffffff'
+              style={styles.icon}
+            />
+          </View> 
+          : 
+          <View style={styles.flex}>{row}</View>
+        }
 
         <Text style={styles.gameinfo}>Throws left: {nbrOfThrowsLeft}</Text>
         <Text style={styles.gameinfo}>{status}</Text>
@@ -259,13 +254,14 @@ export default Gameboard = ({ route }) => {
             Throw dices
           </Text>
         </Pressable>
-        <Text>Total: {totalPoints}</Text>
         <View style={styles.dicepoints}><Grid>{pointsRow}</Grid></View>
         <View style={styles.dicepoints}><Grid>{buttonsRow}</Grid></View>
+        <Text style={styles.total}>Total: {totalPoints}</Text>
         <Text style={styles.player}>Player: {playerName}</Text>
         {/* <Pressable onPress={() => clearAsyncStorage()}>
           <Text> Clear scoreboard </Text>
         </Pressable>  */}
+        
     </View>
   )
 }
