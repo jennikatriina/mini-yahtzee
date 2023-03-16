@@ -10,7 +10,7 @@ export default StyleSheet.create({
   },
   header: {
     marginTop: 30,
-    marginBottom: 5,
+    marginBottom: 0,
     flexDirection: 'row',
   },
   footer: {
@@ -106,5 +106,15 @@ export default StyleSheet.create({
   total: {
     fontSize: 22,
     paddingTop: 25
+  },
+  results: {
+    paddingBottom: 10
+  },
+  playerScore: {
+    fontSize: 15
+  },
+  goodLuck: {
+    fontSize: 15,
+    fontWeight: 'bold'
   }
 });

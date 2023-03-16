@@ -33,6 +33,7 @@ export default Scoreboard = ( {navigation} ) => {
     }
   }
 
+  const B = (props) => <Text style={{fontWeight: 'bold'}}>{props.children}</Text>
 
   return (
     <View style={styles.container}>
@@ -45,9 +46,11 @@ export default Scoreboard = ( {navigation} ) => {
       <Text style={styles.topSeven}>
         Top 7
       </Text>
-      <View >
+      <View>
         {scores.slice(0,7).map((player, i) => (
-          <Text key={i}>{i + 1}. {player.name} {player.date} {player.time} {player.points} </Text>
+          <View style={styles.results}>
+            <Text style={styles.playerScore} key={i}>{i + 1}. {player.name}: <B>{player.points}</B>, {player.date}, {player.time} </Text>
+          </View>
         ))}
       </View>
     </View>

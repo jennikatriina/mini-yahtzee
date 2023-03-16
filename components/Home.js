@@ -60,11 +60,8 @@ export default Home = ({ navigation }) => {
           </Text>
           <Text style={styles.instructions}>
             GOAL: To get points as much as possible.
-            {BONUS_POINTS_LIMIT} points is the limit of
-            getting bonus which gives you {BONUS_POINTS}
-            points more. // muokkaa
           </Text>
-          <Text>Good luck, {playerName}!</Text>
+          <Text style={styles.goodLuck}>Good luck, {playerName}!</Text>
           <Pressable onPress={() => navigation.navigate('Gameboard',
             { player: playerName })}>
             <Text style={styles.button}>PLAY</Text>

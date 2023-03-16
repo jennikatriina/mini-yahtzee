@@ -94,11 +94,18 @@ export default Gameboard = ({ route }) => {
       setStatus('Select your points');
     } else if (nbrOfThrowsLeft < 0) {
       setNbrOfThrowsLeft(NBR_OF_THROWS - 1);
+      // points will be saved when all points from bottom row have been selected
     }
-    // points will be saved when all points from bottom row have been selected
     else if (selectedDicePoints.every(x => x)) {
       savePlayerpoints();
       setStatus('Game over.');
+
+      let sum = 0;
+
+      for (let i of dicePointsTotal) {
+        sum = sum + i;
+      }
+      setTotalPoints(sum);
     } else {
       let sum = 0;
 
